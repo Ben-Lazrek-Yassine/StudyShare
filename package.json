@@ -1,0 +1,42 @@
+{
+  "name": "react",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@cometchat-pro/chat": "^2.1.2",
+    "@react-pdf/renderer": "^3.1.6",
+    "@tabler/icons": "^2.13.2",
+    "@tabler/icons-react": "^2.13.2",
+    "bootstrap": "^5.2.3",
+    "daisyui": "^2.51.5",
+    "firebase": "^9.18.0",
+    "framer-motion": "^10.0.1",
+    "mdb-react-ui-kit": "^5.1.0",
+    "react": "^18.2.0",
+    "react-basic-components": "^0.0.7",
+    "react-daisyui": "^3.0.3",
+    "react-dom": "^18.2.0",
+    "react-md-spinner": "^1.0.0",
+    "react-router-dom": "^6.8.2",
+    "react-social-login-buttons": "^3.6.1",
+    "react-type-animation": "^2.1.2",
+    "reactjs-popup": "^2.0.5",
+    "tabler-icons-react": "^1.56.0",
+    "tesseract.js": "^4.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@vitejs/plugin-react": "^3.1.0",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.7",
+    "vite": "^4.1.0"
+  }
+}
