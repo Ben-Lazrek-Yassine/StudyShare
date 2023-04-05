@@ -7,12 +7,12 @@ const ChatBox = () => {
   const messagesEndRef = useRef();
   const [messages, setMassages] = useState([]);
 
+  // to scroll to bottom of chatbox when new message is added
   const scrollToBottom = () => {
     messagesEndRef.current.scrollIntoView({ behavior: "smooth"})
   };
 
   useEffect(scrollToBottom, [messages])
-
 
   // this loads last 50 messages from db and listens for new messages and arranges them in order of creation 
   useEffect(() => {
@@ -30,7 +30,6 @@ const ChatBox = () => {
       });
       setMassages(messages);
     });
-
     return () => unsubscribe;
   }, []);
 
