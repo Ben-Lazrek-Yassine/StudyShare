@@ -26,7 +26,7 @@ function SignUpForm() {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        navigate("/home")
+        navigate("/")
         console.log(user);
       })
       .catch((error) => {

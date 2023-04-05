@@ -1,13 +1,17 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { FacebookLoginButton, GoogleLoginButton, InstagramLoginButton } from "react-social-login-buttons";
-import { NavLink, useNavigate } from 'react-router-dom'
-import { auth } from '../config/config'
-import { signInWithEmailAndPassword,signInWithPopup } from 'firebase/auth';
-import { TypeAnimation } from 'react-type-animation';
-import 'daisyui/dist/full.css';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { auth, provider } from "../config/config";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { TypeAnimation } from "react-type-animation";
+import "daisyui/dist/full.css";
+import { GoogleLoginButton } from "react-social-login-buttons";
+import { UserAuth } from "../context/AuthContext";
+import { useEffect } from "react";
+import { Replace } from "tabler-icons-react";
 
 function SignInForm() {
+  const { currentUser, googleSignIn } = UserAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -15,6 +19,7 @@ function SignInForm() {
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  
   const handleModalClose = () => {
     setShowModal(false);
     setErrorMessage("");
@@ -23,7 +28,25 @@ function SignInForm() {
   const extractName = (email) => {
     return email.split("@")[0];
   }
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/home");
+    }
+  }, [currentUser, navigate]);
   
+
+
+  const signInWithGoogle = async () =>  {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      console.log(user);
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const onLogin = (e) => {
     if (e) {
@@ -46,6 +69,7 @@ function SignInForm() {
         console.log(errorCode, errorMessage)
       });
   }
+  
 
   return (
     <div className="h-screen bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
@@ -84,11 +108,13 @@ function SignInForm() {
           <div>
             <button onClick={onLogin} className="btn btn-primary w-full">Sign In</button>{" "}
             <Link to="/signup" className="block mt-4 text-center text-indigo-500 hover:text-indigo-700">
-              Create an account
+              Create an account OR
             </Link>
           </div>
 
         </form>
+        <GoogleLoginButton onClick={signInWithGoogle} />
+
         <TypeAnimation
           cursor={true}
           repeat={Infinity}
@@ -109,11 +135,6 @@ function SignInForm() {
               <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
               <div className="bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                 <div className="sm:flex sm:items-start">
-                  <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                    <svg className="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </div>
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                     <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
                       Error

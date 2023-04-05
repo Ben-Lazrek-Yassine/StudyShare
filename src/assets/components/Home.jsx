@@ -4,6 +4,8 @@ import { auth } from '../config/config';
 import { useNavigate } from 'react-router-dom';
 import ChatRoom from './ChatRoom';
 import Navbar from './Navbar';
+
+
 const Home = () => {
     return (
         <div>

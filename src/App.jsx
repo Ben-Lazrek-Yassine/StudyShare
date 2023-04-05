@@ -14,20 +14,26 @@ import { AuthProvider } from "./assets/context/AuthContext";
 import NotFound from "./assets/components/Notfound";
 
 function App() {
-  return (
-    <AuthProvider>
-      <Router>
-            <Routes>
-              <Route path="/" element={<SignInForm />} />
-              <Route path="/signup" element={<SignUpForm />} />
-              <Route path="/home" element={<PrivateRoute><Home/></PrivateRoute>} />
-              <Route path="/ocr" element={<PrivateRoute><ImgOcr/></PrivateRoute>} />
-              <Route path="/chat" element={<PrivateRoute><ChatRoom/></PrivateRoute>} />
-              <Route path="*" element={<NotFound/>} />
-            </Routes>
-      </Router>
-    </AuthProvider>
-  );
-}
+return (
+  <AuthProvider>
+  <Router>
+      <Routes>
+        <Route path="/" element={<SignInForm />} />
+        <Route
+          path="/chat"
+          element={
+            <PrivateRoute>
+              <ChatRoom />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/signup" element={<SignUpForm />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/ocr" element={<ImgOcr />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+  </Router>
+  </AuthProvider>
+); }
 
 export default App;

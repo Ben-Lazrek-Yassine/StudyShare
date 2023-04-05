@@ -1,9 +1,24 @@
 import React from "react";
 import 'daisyui/dist/full.css';
-import {Link}   from "react-router-dom";
+import {Link, useNavigate}   from "react-router-dom";
+import { UserAuth } from "../context/AuthContext";
+
 
 const Navbar = () => {
+  const { currentUser, logout } = UserAuth();
+  const navigate=useNavigate();
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setTimeout(() => {
+        navigate("/");
+      }, 500); 
+    } catch(error) {
+      console.log(error)
+    }
+  }
   return (
+
 <div className="body navbar bg-base-100">
   <div className="navbar-start">
     <div className="dropdown">
@@ -12,7 +27,7 @@ const Navbar = () => {
       </label>
       <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
         <li><a>Item 1</a></li>
-        <li tabIndex={0}>
+        <li>
           <a className="justify-between">
             Parent
             <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
@@ -53,7 +68,7 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn">Logout</a>
+  <button className="btn logout-animation" onClick={handleLogout}>Logout</button>
   </div>
 </div>
   );
