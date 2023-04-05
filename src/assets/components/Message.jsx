@@ -3,17 +3,32 @@ import { UserAuth } from "../context/AuthContext";
 
 const Message = ({ message }) => {
   const COLORS = [
-    "chat-bubble chat-bubble-primary",
-    "chat-bubble chat-bubble-secondary",
-    "chat-bubble chat-bubble-accent",
-    "chat-bubble chat-bubble-info",
-    "chat-bubble chat-bubble-success",
-    "chat-bubble chat-bubble-warning",
-    "chat-bubble chat-bubble-error"
+    "chat-bubble bg-orange-900 text-white",
+    "chat-bubble bg-orange-800 text-white",
+    "chat-bubble bg-orange-700 text-white",
+    "chat-bubble bg-orange-600 text-white",
+    "chat-bubble bg-orange-500 text-white",
+    "chat-bubble bg-orange-400 text-white",
+    "chat-bubble bg-orange-300 text-white",
   ];
 
+
+  const  AVATARS = [
+    "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light",
+    "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraightStrand&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light",
+    "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Sunglasses&hairColor=Black&facialHairType=BeardLight&facialHairColor=Black&clotheType=Overall&clotheColor=Gray01&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light",
+    "https://avataaars.io/?avatarStyle=Circle&topType=WinterHat3&accessoriesType=Blank&hatColor=PastelBlue&facialHairType=BeardLight&facialHairColor=Black&clotheType=BlazerSweater&eyeType=Default&eyebrowType=Default&mouthType=ScreamOpen&skinColor=Light"
+  ]
+
   const { currentUser } = UserAuth();
-  const [color, setColor] = useState(COLORS[Math.floor(Math.random() * COLORS.length)]);
+  const [color, setColor] = useState(COLORS.map((color) => color)[Math.floor(Math.random() * COLORS.length)]);
+  
+  if (message.avatar === null )
+  {
+    message.avatar = AVATARS [Math.floor(Math.random() * AVATARS.length)];
+    message.name =  message.email ? message.email.split("@")[0] : "Anonymous";
+    console.log(message.name)
+  }
 
   return (
     <div>
@@ -31,5 +46,6 @@ const Message = ({ message }) => {
     </div>
   );
 };
+
 
 export default Message;

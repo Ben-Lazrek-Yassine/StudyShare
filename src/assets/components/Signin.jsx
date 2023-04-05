@@ -1,47 +1,16 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-import { auth, provider } from "../config/config";
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { TypeAnimation } from "react-type-animation";
-import "daisyui/dist/full.css";
-import { GoogleLoginButton } from "react-social-login-buttons";
 import { UserAuth } from "../context/AuthContext";
-import { useEffect } from "react";
-import { Replace } from "tabler-icons-react";
 
 function SignInForm() {
-  const { currentUser, googleSignIn } = UserAuth();
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  // your code here
 
-  
-  const handleModalClose = () => {
-    setShowModal(false);
-    setErrorMessage("");
-  }
-
-  const extractName = (email) => {
-    return email.split("@")[0];
-  }
-
-  useEffect(() => {
-    if (currentUser) {
-      navigate("/home");
-    }
-  }, [currentUser, navigate]);
-  
-
+  const { setCurrentUser } = UserAuth();
 
   const signInWithGoogle = async () =>  {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       console.log(user);
+      setCurrentUser(user); // set the currentUser state in AuthContext
       navigate("/home");
     } catch (error) {
       console.log(error);
@@ -54,12 +23,10 @@ function SignInForm() {
     }
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
-        navigate("/home")
         console.log(user);
-        console.log(user.email);
-        console.log(extractName(user.email));
+        setCurrentUser(user); // set the currentUser state in AuthContext
+        navigate("/home")
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -69,7 +36,6 @@ function SignInForm() {
         console.log(errorCode, errorMessage)
       });
   }
-  
 
   return (
     <div className="h-screen bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
@@ -121,12 +87,7 @@ function SignInForm() {
           style={{ fontSize: '2em', textAlign: 'center', marginTop: '1rem', color: 'black' }}
 
           className='studyshare'
-          sequence={[
-            'Study Share',
-            1000,
-            ' ',
-            1000,
-            'Study Share',
+          sequence={['Study Share',1000,' ',1000,'Study Share',
           ]}
         />
         {showModal && (

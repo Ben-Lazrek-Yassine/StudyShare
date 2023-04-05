@@ -7,7 +7,16 @@ const SendMessage = () => {
   const [value, setValue] = useState("");
   const { currentUser } = UserAuth();
   const [showModal, setShowModal] = useState(false);
-  console.log(currentUser.photoURL)
+
+   const  AVATARS = [
+      "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light",
+      "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraightStrand&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light",
+      "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Sunglasses&hairColor=Black&facialHairType=BeardLight&facialHairColor=Black&clotheType=Overall&clotheColor=Gray01&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light",
+      "https://avataaars.io/?avatarStyle=Circle&topType=WinterHat3&accessoriesType=Blank&hatColor=PastelBlue&facialHairType=BeardLight&facialHairColor=Black&clotheType=BlazerSweater&eyeType=Default&eyebrowType=Default&mouthType=ScreamOpen&skinColor=Light"
+    ]
+    const extractName = (email) => {
+    return email.split("@")[0];
+  }
   const handleSendMessage = async (e) => {
     e.preventDefault();
 
@@ -21,6 +30,7 @@ const SendMessage = () => {
       await addDoc(collection(db, "messages"), {
         text: value,
         name: displayName,
+        email: currentUser.email,
         avatar: photoURL,
         createdAt: serverTimestamp(),
         uid
