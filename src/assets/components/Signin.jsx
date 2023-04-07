@@ -1,16 +1,40 @@
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { TypeAnimation } from "react-type-animation";
+import "daisyui/dist/full.css";
+import { GoogleLoginButton } from "react-social-login-buttons";
 import { UserAuth } from "../context/AuthContext";
+import { useEffect } from "react";
+import { Replace } from "tabler-icons-react";
 
 function SignInForm() {
-  // your code here
+  const { currentUser, googleSignIn } = UserAuth();
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [userEmail, setUserEmail] = useState("");
 
-  const { setCurrentUser } = UserAuth();
+  const handleModalClose = () => {
+    setShowModal(false);
+    setErrorMessage("");
+  }
 
-  const signInWithGoogle = async () =>  {
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/home");
+    }
+  }, [currentUser, navigate]);
+
+  const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       console.log(user);
-      setCurrentUser(user); // set the currentUser state in AuthContext
+      setUserEmail(user.email);
       navigate("/home");
     } catch (error) {
       console.log(error);
@@ -24,9 +48,11 @@ function SignInForm() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
-        setCurrentUser(user); // set the currentUser state in AuthContext
+        setUserEmail(user.email);
         navigate("/home")
+        console.log(user);
+        console.log(user.email);
+        console.log(extractName(user.email));
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -37,6 +63,7 @@ function SignInForm() {
       });
   }
 
+  
   return (
     <div className="h-screen bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-md w-full md:w-1/3">

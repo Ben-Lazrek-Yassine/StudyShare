@@ -23,11 +23,10 @@ const Message = ({ message }) => {
   const { currentUser } = UserAuth();
   const [color, setColor] = useState(COLORS.map((color) => color)[Math.floor(Math.random() * COLORS.length)]);
   
-  if (message.avatar === null )
-  {
-    message.avatar = AVATARS [Math.floor(Math.random() * AVATARS.length)];
-    message.name =  message.email ? message.email.split("@")[0] : "Anonymous";
-    console.log(message.name)
+  if (!message.avatar) {
+    const randomAvatar = AVATARS[Math.floor(Math.random() * AVATARS.length)];
+    const name = message.email ? message.email.split("@")[0] : "Anonymous";
+    message = { ...message, avatar: randomAvatar, name };
   }
 
   return (
