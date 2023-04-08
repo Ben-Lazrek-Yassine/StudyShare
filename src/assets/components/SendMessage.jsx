@@ -2,11 +2,15 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useState } from "react"
 import { UserAuth } from "../context/AuthContext";
 import { db } from "../config/config";
-
+import { useEffect } from "react";
 const SendMessage = () => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(() => localStorage.getItem('inputValue') || "");
   const { currentUser } = UserAuth();
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('inputValue', value);
+  }, [value]);
 
    const  AVATARS = [
       "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light",
@@ -14,9 +18,7 @@ const SendMessage = () => {
       "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Sunglasses&hairColor=Black&facialHairType=BeardLight&facialHairColor=Black&clotheType=Overall&clotheColor=Gray01&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light",
       "https://avataaars.io/?avatarStyle=Circle&topType=WinterHat3&accessoriesType=Blank&hatColor=PastelBlue&facialHairType=BeardLight&facialHairColor=Black&clotheType=BlazerSweater&eyeType=Default&eyebrowType=Default&mouthType=ScreamOpen&skinColor=Light"
     ]
-    const extractName = (email) => {
-    return email.split("@")[0];
-  }
+
   const handleSendMessage = async (e) => {
     e.preventDefault();
 
