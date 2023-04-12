@@ -3,46 +3,46 @@ import { useState } from "react"
 import { UserAuth } from "../context/AuthContext";
 import { db } from "../config/config";
 import { useEffect } from "react";
+
+
 const SendMessage = () => {
   const [value, setValue] = useState(() => localStorage.getItem('inputValue') || "");
   const { currentUser } = UserAuth();
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    localStorage.setItem('inputValue', value);
-  }, [value]);
-
-   const  AVATARS = [
-      "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light",
-      "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraightStrand&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light",
-      "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Sunglasses&hairColor=Black&facialHairType=BeardLight&facialHairColor=Black&clotheType=Overall&clotheColor=Gray01&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light",
-      "https://avataaars.io/?avatarStyle=Circle&topType=WinterHat3&accessoriesType=Blank&hatColor=PastelBlue&facialHairType=BeardLight&facialHairColor=Black&clotheType=BlazerSweater&eyeType=Default&eyebrowType=Default&mouthType=ScreamOpen&skinColor=Light"
-    ]
+  const AVATARS = [
+    "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light",
+    "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraightStrand&accessoriesType=Blank&hairColor=BrownDark&facialHairType=Blank&clotheType=BlazerShirt&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light",
+    "https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Sunglasses&hairColor=Black&facialHairType=BeardLight&facialHairColor=Black&clotheType=Overall&clotheColor=Gray01&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light",
+    "https://avataaars.io/?avatarStyle=Circle&topType=WinterHat3&accessoriesType=Blank&hatColor=PastelBlue&facialHairType=BeardLight&facialHairColor=Black&clotheType=BlazerSweater&eyeType=Default&eyebrowType=Default&mouthType=ScreamOpen&skinColor=Light"
+  ];
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
 
-    if(value.trim() === "") {
+    if (value.trim() === "") {
       setShowModal(true);
       return;
     }
 
     try {
       const { uid, displayName, photoURL } = currentUser; 
+      let avatar = currentUser.photoURL === null ? AVATARS[Math.floor(Math.random() * AVATARS.length)] : currentUser.photoURL;
+      let name = currentUser.displayName === null ? currentUser.email.split("@")[0] : currentUser.displayName;
       await addDoc(collection(db, "messages"), {
         text: value,
-        name: displayName,
+        name: name,
         email: currentUser.email,
-        avatar: photoURL,
+        avatar,
         createdAt: serverTimestamp(),
-        uid
-      })
+        uid,
+      });
     } catch(error) {
       console.log(error);
     }
-    setValue("");
-  }
 
+    setValue("");
+  };
   return (
     <div className="bg-gray-200 fixed bottom-0 w-full py-10 shadow-lg">
       <form onSubmit={handleSendMessage} className="px-2 containerWrap flex">

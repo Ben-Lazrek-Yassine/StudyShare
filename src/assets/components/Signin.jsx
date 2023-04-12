@@ -6,7 +6,6 @@ import "daisyui/dist/full.css";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { UserAuth } from "../context/AuthContext";
 import { useEffect } from "react";
-import { Replace } from "tabler-icons-react";
 import { auth, provider } from "../config/config";
 
 

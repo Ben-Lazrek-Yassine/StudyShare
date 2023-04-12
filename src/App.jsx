@@ -12,6 +12,7 @@ import ChatRoom from "./assets/components/ChatRoom";
 import { PrivateRoute } from "./assets/routes/PrivateRoute";
 import { AuthProvider } from "./assets/context/AuthContext";
 import NotFound from "./assets/components/Notfound";
+import UploadDoc from "./assets/components/UploadDoc";
 
 function App() {
 return (
@@ -30,6 +31,7 @@ return (
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/home" element={<Home />} />
         <Route path="/ocr" element={<ImgOcr />} />
+        <Route path="/upload" element={<UploadDoc />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
   </Router>
