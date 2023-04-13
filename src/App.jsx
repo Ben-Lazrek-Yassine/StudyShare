@@ -16,7 +16,7 @@ import SharedDocs from "./assets/components/SharedDocs";
 import CourseHome from "./assets/components/CourseHome";
 import Room_Navbar from "./assets/components/Room_Navbar";
 import Home from "./assets/components/Home";
-
+import Chatgpt from "./assets/components/Chatgpt";
 function App() {
 return (
   <AuthProvider>
@@ -35,6 +35,7 @@ return (
         <Route path="/documents" element={<SharedDocs />} />
         <Route path="/ocr" element={<ImgOcr />} />
         <Route path="/home" element={<Home/>} />
+        <Route path="/chatgpt" element={<Chatgpt/>} />
         <Route path="/upload" element={<>
           <UploadDoc />
           <Room_Navbar />

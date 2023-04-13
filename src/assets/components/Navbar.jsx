@@ -71,8 +71,8 @@ const Navbar = () => {
         </li>
         </ul>
       </li >
-      <li>  <Link to="/documents">Shared Documents</Link></li>
-      <li>  <Link to="/courses">Courses</Link></li>
+      <li>  <Link to="/documents">Shared Documents</Link>
+</li>
     </ul>
   </div>
   <div className="navbar-end">
