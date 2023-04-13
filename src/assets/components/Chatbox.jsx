@@ -19,7 +19,7 @@ const ChatBox = () => {
     const q = query(
       collection(db, "messages"),
       orderBy("createdAt"),
-      limit(50),
+      limit(1000),
     );
 
     // callback that executes when new message is added to db so this basically listens for new messages and displays them

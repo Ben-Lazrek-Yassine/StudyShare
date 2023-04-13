@@ -1,7 +1,6 @@
 import Navbar from './Navbar';
 import Chatbox from './Chatbox';
 import SendMessage from './SendMessage';
-
   const ChatRoom = () => {
   return (
     <div>

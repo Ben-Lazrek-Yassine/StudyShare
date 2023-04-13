@@ -6,7 +6,8 @@ import "daisyui/dist/full.css";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { UserAuth } from "../context/AuthContext";
 import { useEffect } from "react";
-import { Replace } from "tabler-icons-react";
+import { auth, provider } from "../config/config";
+
 
 function SignInForm() {
   const { currentUser, googleSignIn } = UserAuth();
@@ -52,7 +53,6 @@ function SignInForm() {
         navigate("/home")
         console.log(user);
         console.log(user.email);
-        console.log(extractName(user.email));
       })
       .catch((error) => {
         const errorCode = error.code;
