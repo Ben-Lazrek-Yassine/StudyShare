@@ -50,8 +50,6 @@ function Room_Navbar() {
           >
             <Add />
           </IconButton>
-          <IconButton>
-          </IconButton>
           <IconButton onClick={logout}>
             <Avatar src={user?.photoURL} />
           </IconButton>

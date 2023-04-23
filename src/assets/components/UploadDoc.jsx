@@ -3,8 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper, Typography, LinearProgress } from "@material-ui/core";
 import { storage } from '../config/config';
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { color } from "framer-motion";
-
+import Navbar from "./Navbar";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
@@ -22,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     maxWidth: 500,
     minWidth: 300,
+    backgroundColor: "#d3d0d0",
   },
   form: {
     display: "flex",
@@ -49,7 +49,13 @@ function UploadDoc() {
   const classes = useStyles();
   const [imgUrl, setImgUrl] = useState(null);
   const [progresspercent, setProgresspercent] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
+  
+  const handleModalClose = () => {
+    setShowModal(false);
+    setErrorMessage("");
+}
   const handleSubmit = (e) => {
     e.preventDefault()
     const file = e.target[0]?.files[0]
@@ -75,6 +81,8 @@ function UploadDoc() {
   }
 
   return (
+    <>
+    <Navbar />
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <Typography variant="h5" gutterBottom>
@@ -97,10 +105,6 @@ function UploadDoc() {
           progresspercent > 0 && progresspercent < 100 &&
           <LinearProgress variant="determinate" value={progresspercent} />
         }
-        {
-          imgUrl &&
-          <img src={imgUrl} alt='uploaded file' height={200} />
-        }
         <div class="flex items-center justify-center w-full">
     <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
         <div class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -113,6 +117,7 @@ function UploadDoc() {
 </div> 
       </Paper>
     </div>
+        </>
   );
 }
 

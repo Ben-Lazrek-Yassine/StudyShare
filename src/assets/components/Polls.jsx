@@ -19,7 +19,7 @@ function Polls() {
   }
 
   return (
-    <div>
+    <div className='bg-white px-5'>
       <Poll question={pollQuestion} answers={answers} onVote={handleVote} />
     </div>
   );

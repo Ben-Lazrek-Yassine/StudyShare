@@ -77,9 +77,9 @@ const ImgOcr = () => {
                 </label>
                 <textarea
                   id="result"
-                  className="text-center p-2 border border-gray-400 rounded-lg w-full"
+                  className="text-center p-2 border border-gray-400 rounded-lg w-full bg-white text-lg"
                   value={text}
-                  rows="20"
+                  rows="10"
                   style={{ color: "black" }}
                   onChange={(e) => setText(e.target.value)}
                 ></textarea>

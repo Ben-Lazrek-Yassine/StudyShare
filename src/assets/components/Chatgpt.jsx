@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import bot from '../images/bot.svg';
-import user from '../images/user.svg';
+import bot from '../../assets/components/about/bot.svg';
+import user from '../components/about/user.svg';
 import "daisyui/dist/full.css";
 
 function ChatContainer({ messages }) {
@@ -13,12 +13,12 @@ function ChatContainer({ messages }) {
   return (
     <div className="chat-container p-4" ref={chatContainerRef}>
       {messages.map((message) => (
-        <div className={`wrapper ${message.isAi && 'ai'}`} key={message.id}>
-          <div className="chat">
-            <div className="profile">
-              <img src={message.isAi ? bot : user} alt={message.isAi ? 'bot' : 'user'} />
+        <div className={message.isAi? "bg-gray-600" : "bg-slate-700"} key={message.id}>
+          <div className="chat px-11">
+            <div className="profile px-1">
+              <img src={message.isAi ? bot : user}  alt={message.isAi ? 'bot' : 'user'} />
             </div>
-            <div className="message">{message.value}</div>
+            <div className="message bg-gray-700">{message.value}</div>
           </div>
         </div>
       ))}
@@ -62,7 +62,7 @@ function Form({ onAddMessage }) {
 
   return (
     <form onSubmit={handleSubmit} className="flex justify-between my-4">
-      <input type="text" name="prompt" placeholder="Type something..." className="w-full mr-2 p-2 rounded-lg border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500" />
+      <input type="text" name="prompt" placeholder="Type something..." className="mr-2 p-2 rounded-lg w-screen" />
       <button type="submit" className="btn btn-primary">Send</button>
     </form>
   );
@@ -87,7 +87,7 @@ function Chatgpt() {
   }
 
   return (
-    <div className="p-6 ">
+    <div className="p-6">
       <ChatContainer messages={messages} />
       <Form onAddMessage={addMessage} />
     </div>

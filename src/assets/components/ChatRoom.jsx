@@ -6,7 +6,7 @@ import SendMessage from './SendMessage';
     <div>
       <Navbar />
       <Chatbox/>
-      <SendMessage />
+      <SendMessage /> 
     </div>
   );
 };
