@@ -1,17 +1,10 @@
 import React from "react";
-import 'daisyui/dist/full.css';
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 import { Avatar, IconButton, MenuItem, Menu } from "@material-ui/core";
-import { Add, Apps, Menu as MenuIcon } from "@material-ui/icons";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useRecoilState } from "recoil";
 import { auth, logout } from "../config/config";
-import { createDialogAtom, joinDialogAtom } from "./atoms";
-import "../Styles/Navbar.css";
-import { useState } from "react";
-
-
+import "../Styles/Navbar.css"
 const Navbar = () => {
   const [user, loading,error] = useAuthState(auth);
   const { currentUser, logout } = UserAuth();
@@ -86,7 +79,7 @@ const Navbar = () => {
             </ul>
           </li >
           <li>
-            <Link to="/about-us">About Us</Link>
+            <Link to="/sign-in">About Us</Link>
           </li>
         </ul>
       </div>
@@ -115,7 +108,7 @@ const Navbar = () => {
                     <span className="text-3xl">Y</span>
                   </div>
                 </div>
-                {"     "}Louay has sent a message!
+                Louay has sent a message!
               </h1>
             </div>
 
@@ -126,8 +119,7 @@ const Navbar = () => {
       <button className="btn logout-animation" onClick={handleLogout}>Logout</button>
       <IconButton onClick={logout}>
             <Avatar src={user?.photoURL} />
-          </IconButton>
-          
+      </IconButton>
     </div>
   );
 };

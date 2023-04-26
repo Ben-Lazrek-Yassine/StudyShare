@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import bot from '../../assets/components/about/bot.svg';
-import user from '../components/about/user.svg';
+import bot from '/images/bot.svg';
+import user from '/images/user.svg';
 import "daisyui/dist/full.css";
 
 function ChatContainer({ messages }) {

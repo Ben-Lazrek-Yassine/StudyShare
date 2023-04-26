@@ -1,19 +1,20 @@
-import React from 'react'
-import Hero from './Hero'
-import HAbout from './HAbout'
-import Hprice from './Hprice'
-import AboutCard from './AboutCard'
+import React from 'react';
+import GlobalStyles from './globalStyles'
+import  Navbar from './Navbar/Navbar';
+import Home from './HomePage/Home';
 
 
+function App() {
+  return (
+    
+      <>
+          <GlobalStyles />
+          <Navbar />
+          <Home/>
+      </>
+        
+    
+  );
+}
 
-const About_wrap = () => {
-    return (
-        <>
-      <Hero />
-      <AboutCard />
-      <HAbout />
-        </>
-    )
-    }
-
-export default About_wrap
+export default App;

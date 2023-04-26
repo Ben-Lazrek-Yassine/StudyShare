@@ -105,8 +105,7 @@ function Login() {
 
                             <ErrorText styleClass="mt-8">{errorMessage}</ErrorText>
                             <button onClick={onLogin} type="submit" className={"btn mt-2 w-full btn-primary" + (loading ? " loading" : "")}>Login</button>
-                            <GoogleLoginButton iconSize='28' onClick={signInWithGoogle} />
-
+                            <GoogleLoginButton  iconSize='28' onClick={signInWithGoogle} />
                             <div className='text-center mt-4'>Don't have an account yet? <Link to="/signup"><span className="  inline-block  hover:text-primary hover:underline hover:cursor-pointer transition duration-200">Register</span></Link></div>
                         </form>
                     </div>

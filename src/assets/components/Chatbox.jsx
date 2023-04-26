@@ -9,7 +9,7 @@ const ChatBox = () => {
 
   // to scroll to bottom of chatbox when new message is added
   const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({ behavior: "smooth"})
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
   };
 
   useEffect(scrollToBottom, [messages])

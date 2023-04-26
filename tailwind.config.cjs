@@ -8,5 +8,5 @@ module.exports = {
     extend: {},
     themes: ["dracula"],
   },
-  plugins: [require("daisyui")],
+  // plugins: [require("daisyui")]
 }

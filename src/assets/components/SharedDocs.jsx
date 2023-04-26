@@ -37,9 +37,9 @@ const SharedDocs = () => {
             </h2>
           </div>
           <div className="bg-white shadow-md rounded-lg p-6 ">
-            <div class="">
-              <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 ">
-                <div class="grid-cols-9 gap-4 flex justify-center">
+            <div className="">
+              <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 ">
+                <div className="grid-cols-9 gap-4 flex justify-center ">
                     <MenuItem
                       onClick={() => {
                         navigateToUpload();
@@ -47,7 +47,10 @@ const SharedDocs = () => {
                         handleClose();
                       }}
                     >
+                      <div className="rounded-lg  ">
                       <Add />
+
+                      </div>
                     </MenuItem>
                   </div>
               </div>
@@ -58,16 +61,27 @@ const SharedDocs = () => {
                   <li key={file.name} className="py-4">
                     <div className="flex space-x-3">
                       <div className="min-w-0 flex">
-                        <a href={file.url} download={file.name} className="text-sm font-medium text-gray-900 hover:text-indigo-600">
-                          {file.name}
-                          <div className="rating rating-sm overflow-hidden px-1">
-                            <input type="radio" name="rating-9" className="mask mask-star-2" />
-                            <input type="radio" name="rating-9" className="mask mask-star-2" />
-                            <input type="radio" name="rating-9" className="mask mask-star-2" />
-                            <input type="radio" name="rating-9" className="mask mask-star-2" />
-                            <input type="radio" name="rating-9" className="mask mask-star-2" />
-                          </div>
-                        </a>
+                        {file.url.endsWith(".jpg") ||
+                        file.url.endsWith(".jpeg") ||
+                        file.url.endsWith(".png") ? (
+                          <button
+                            onClick={() => {
+                              setSelectedFile(file.url);
+                              setShowModal(true);
+                            }}
+                            className="text-sm font-medium text-gray-900 hover:text-indigo-600"
+                          >
+                            {file.name}
+                          </button>
+                        ) : (
+                          <a
+                            href={file.url}
+                            download={file.name}
+                            className="text-sm font-medium text-gray-900 hover:text-indigo-600"
+                          >
+                            {file.name}
+                          </a>
+                        )}
                       </div>
                     </div>
                   </li>

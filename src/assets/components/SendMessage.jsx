@@ -91,9 +91,9 @@ const SendMessage = () => {
   };
 
    return (
-    <div className=" fixed bottom-0 w-full py-10 shadow-lg">
+    <div className="fixed bottom-0 w-full py-10 shadow-lg">
         {openPoll && <Polls />}
-        {showEmoji && <EmojiPicker height={500} width={400}  onEmojiClick={handleEmojiPicker} />}
+        {showEmoji && <EmojiPicker height={500} width={400}  onEmojiClick={onEmojiClick} ref={inputRef} />}
       <form onSubmit={handleSendMessage} className="px-2 containerWrap flex">
         <input value={value} onChange={e => setValue(e.target.value)} className="input w-full focus:outline-none bg-gray-100 rounded-r-none" type="text" placeholder="Enter a message..." />
         <button type="submit" className="w-auto bg-gray-500 text-white rounded-r-lg px-5 text-sm">Send</button>
