@@ -1,2 +1,2 @@
-AUTH_KEY="f22797eababe647f8075f530fc4ab4b8747bba94"
-APP_ID="234009cff58535a6"
+AUTH_KEY="xxxxx"
+APP_ID="xxxx"
